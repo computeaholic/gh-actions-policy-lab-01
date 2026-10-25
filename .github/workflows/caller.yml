@@ -1,0 +1,11 @@
+name: Unprotected caller (owned test)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  invoke_protected_callee:
+    name: Call protected reusable workflow
+    uses: ./.github/workflows/protected-callee.yml
+    permissions:
+      contents: read
