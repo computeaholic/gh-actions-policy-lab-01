@@ -1,0 +1,21 @@
+name: Protected callee (owned test)
+on:
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  protected_callee:
+    name: Protected callee job
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Marker and real defining workflow identity
+        shell: bash
+        run: |
+          echo "R01_PROTECTED_CALLEE_JOB_EXECUTED"
+          echo "R01_DEFINING_WORKFLOW=${{ job.workflow_file_path }}"
+          echo "R01_WORKFLOW_REF=${{ job.workflow_ref }}"
+          echo "R01_RUN_ID=${{ github.run_id }}"
+          echo "R01_ACTOR=${{ github.actor }}"
+          echo "R01_PROTECTED_CALLEE_JOB_EXECUTED" >> "$GITHUB_STEP_SUMMARY"
